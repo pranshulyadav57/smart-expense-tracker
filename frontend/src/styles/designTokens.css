@@ -1,0 +1,40 @@
+:root{
+  --primary: #1976D2;
+  --primary-dark: #0D47A1;
+  --accent: #00BCD4;
+  --success: #10B981;
+  --danger: #EF4444;
+  --warning: #F59E0B;
+
+  --gradient: linear-gradient(135deg,#1976D2,#6C63FF,#00BCD4);
+
+  --glass: rgba(255,255,255,0.04);
+  --surface: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.12);
+  --bg-dark: #0A0F1E;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --radius: 18px;
+  --shadow-glow: 0 0 40px rgba(25,118,210,0.25);
+}
+
+/* shimmer helper for skeletons */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.02) 100%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+.float-subtle{
+  transform-origin: center;
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float{
+  0%{ transform: translateY(0px); }
+  50%{ transform: translateY(-6px); }
+  100%{ transform: translateY(0px); }
+}
