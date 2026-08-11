@@ -53,35 +53,55 @@ applySecurity(app);
    SOCKET.IO
 ====================================================== */
 
-const allowedOrigins = [
+const getAllowedOrigins = () => {
+  const configuredOrigins = [
     process.env.CLIENT_URL,
-    "http://localhost:3000"
-].filter(Boolean);
+    process.env.FRONTEND_URL,
+    process.env.CORS_ORIGIN,
+    process.env.CORS_ORIGINS,
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:5000",
+  ].filter(Boolean);
 
-app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            console.error("CORS blocked origin:", origin);
-            callback(new Error(`CORS policy: origin ${origin} not allowed`));
-        }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    credentials: true
-}));
+  const origins = new Set();
+  configuredOrigins.forEach((value) => {
+    value
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean)
+      .forEach((item) => origins.add(item));
+  });
+
+  return Array.from(origins);
+};
+
+const allowedOrigins = getAllowedOrigins();
+
+const corsOriginHandler = (origin, callback) => {
+  if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== "production") {
+    callback(null, true);
+    return;
+  }
+
+  callback(new Error(`CORS blocked for origin: ${origin}`));
+};
+
+const io = new Server(server, {
+  cors: {
+    origin: corsOriginHandler,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    credentials: true,
+  },
+});
 
 app.set("io", io);
 
 io.on("connection", (socket) => {
-  logger.info(
-    `Socket connected: ${socket.id}`
-  );
+  logger.info(`Socket connected: ${socket.id}`);
 
   socket.on("disconnect", () => {
-    logger.info(
-      `Socket disconnected: ${socket.id}`
-    );
+    logger.info(`Socket disconnected: ${socket.id}`);
   });
 });
 
@@ -91,18 +111,7 @@ io.on("connection", (socket) => {
 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      const allowed = [
-        process.env.CLIENT_URL,
-        "http://localhost:3000",
-      ].filter(Boolean);
-
-      if (!origin || allowed.includes(origin)) {
-        return callback(null, true);
-      }
-
-      return callback(new Error("CORS policy: origin not allowed"), false);
-    },
+    origin: corsOriginHandler,
     credentials: true,
   })
 );
