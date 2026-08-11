@@ -53,22 +53,23 @@ applySecurity(app);
    SOCKET.IO
 ====================================================== */
 
-const io = new Server(server, {
-  cors: {
-    origin:
-      process.env.CLIENT_URL ||
-      "http://localhost:3000",
+const allowedOrigins = [
+    process.env.CLIENT_URL,
+    "http://localhost:3000"
+].filter(Boolean);
 
-    methods: [
-      "GET",
-      "POST",
-      "PUT",
-      "DELETE",
-    ],
-
-    credentials: true,
-  },
-});
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            console.error("CORS blocked origin:", origin);
+            callback(new Error(`CORS policy: origin ${origin} not allowed`));
+        }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    credentials: true
+}));
 
 app.set("io", io);
 
@@ -90,10 +91,18 @@ io.on("connection", (socket) => {
 
 app.use(
   cors({
-    origin:
-      process.env.CLIENT_URL ||
-      "http://localhost:3000",
+    origin: (origin, callback) => {
+      const allowed = [
+        process.env.CLIENT_URL,
+        "http://localhost:3000",
+      ].filter(Boolean);
 
+      if (!origin || allowed.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("CORS policy: origin not allowed"), false);
+    },
     credentials: true,
   })
 );
@@ -145,7 +154,6 @@ const safeRoute = (path, file, options = {}) => {
     const msg = `Failed to load route: ${file}. Reason: ${err.message}`;
     logger.error(msg);
 
-    // Record failure so we can decide to abort startup later
     _failedRouteLoads.push({ path, file, reason: err.message });
   }
 };
@@ -174,11 +182,9 @@ safeRoute(
   "./routes/aiRoutes"
 );
 
-// If any mandatory routes failed to load, fail fast when running directly.
 if (_failedRouteLoads.length > 0) {
   logger.error('One or more routes failed to load:', { failures: _failedRouteLoads });
 
-  // If this module is the main entrypoint, abort startup so failures are visible.
   if (require.main === module) {
     logger.error('Aborting startup due to route load failures');
     process.exit(1);
@@ -281,9 +287,10 @@ process.on(
 const DEFAULT_PORT = Number(process.env.PORT) || 5000;
 
 const startServer = (port, attemptsLeft = 5) => {
-  server.listen(port, () => {
+  server.listen(port, "0.0.0.0", () => {
     logger.info(`🚀 Server running on port ${port}`);
   });
+};
 
   server.on('error', (err) => {
     if (err && err.code === 'EADDRINUSE') {
