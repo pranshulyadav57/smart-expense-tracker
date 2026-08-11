@@ -290,7 +290,6 @@ const startServer = (port, attemptsLeft = 5) => {
   server.listen(port, "0.0.0.0", () => {
     logger.info(`🚀 Server running on port ${port}`);
   });
-};
 
   server.on('error', (err) => {
     if (err && err.code === 'EADDRINUSE') {
