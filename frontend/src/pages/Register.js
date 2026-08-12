@@ -346,7 +346,7 @@ export default function Register() {
             disabled={loading}
           >
             <option value="student">
-              Student
+              Personal
             </option>
 
             <option value="business">

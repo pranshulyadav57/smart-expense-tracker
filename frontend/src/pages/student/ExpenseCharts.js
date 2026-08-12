@@ -67,8 +67,8 @@ export default function ExpenseCharts({ summary = {}, breakdown = [], expenses =
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
       {/* Line Chart - Larger on large screens */}
-      <div className="lg:col-span-2 p-4 bg-white rounded-lg shadow">
-        <h3 className="font-semibold text-lg mb-4 text-slate-800">Last 7 Days Spend</h3>
+      <div className="lg:col-span-2 p-4 bg-white dark:bg-slate-800 rounded-lg shadow">
+        <h3 className="font-semibold text-lg mb-4 text-slate-800 dark:text-slate-100">Last 7 Days Spend</h3>
         <div style={{ position: 'relative', width: '100%', height: '300px' }}>
           <Line 
             data={buildTrendData(expenses)} 
@@ -78,8 +78,8 @@ export default function ExpenseCharts({ summary = {}, breakdown = [], expenses =
       </div>
 
       {/* Doughnut Chart - Sidebar on large screens */}
-      <div className="p-4 bg-white rounded-lg shadow">
-        <h3 className="font-semibold text-lg mb-4 text-slate-800">Category Breakdown</h3>
+      <div className="p-4 bg-white dark:bg-slate-800 rounded-lg shadow">
+        <h3 className="font-semibold text-lg mb-4 text-slate-800 dark:text-slate-100">Category Breakdown</h3>
         {breakdown && breakdown.length > 0 ? (
           <div style={{ position: 'relative', width: '100%', height: '280px' }}>
             <Doughnut 
@@ -100,7 +100,7 @@ export default function ExpenseCharts({ summary = {}, breakdown = [], expenses =
             />
           </div>
         ) : (
-          <div className="flex items-center justify-center h-64 text-sm text-slate-500">
+          <div className="flex items-center justify-center h-64 text-sm text-slate-500 dark:text-slate-400">
             <p>No category data yet.</p>
           </div>
         )}

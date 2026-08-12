@@ -295,7 +295,12 @@ API.interceptors.response.use(
 ====================================================== */
 
 export const getErrorMessage = (error) => {
-  console.error("API ERROR:", error?.response?.data || error?.message || error);
+  // Log structured error for debugging
+  try {
+    console.error("API ERROR:", error && error.response ? error.response.data || error.response : error);
+  } catch (e) {
+    console.error("API ERROR (logging failed):", e, error);
+  }
 
   // Network timeout error
   if (error?.code === "ECONNABORTED") {
@@ -309,12 +314,12 @@ export const getErrorMessage = (error) => {
 
   // API error response with message
   if (error?.response?.data?.message) {
-    return error.response.data.message;
+    return String(error.response.data.message);
   }
 
   // Validation errors array
   if (Array.isArray(error?.response?.data?.errors)) {
-    return error.response.data.errors.map((e) => e.msg || e.message).join(", ");
+    return error.response.data.errors.map((e) => e.msg || e.message || JSON.stringify(e)).join(", ");
   }
 
   // HTTP status message
@@ -335,7 +340,10 @@ export const getErrorMessage = (error) => {
     return "Server error. Please try again later.";
   }
 
-  return error?.message || "Something went wrong. Please try again.";
+  // Ensure we always return a string
+  if (error && typeof error === 'string') return error;
+  if (error?.message) return String(error.message);
+  return "Something went wrong. Please try again.";
 };
 
 export default API;

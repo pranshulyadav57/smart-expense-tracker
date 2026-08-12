@@ -176,7 +176,7 @@ export default function StudentDashboard() {
   }
 
   return (
-    <div className="bg-slate-50 min-h-screen font-sans">
+    <div className="bg-slate-50 dark:bg-slate-950 dark:text-slate-100 min-h-screen font-sans">
       <div className="flex flex-col md:flex-row">
         <Sidebar />
 
@@ -215,7 +215,7 @@ export default function StudentDashboard() {
 
             <div className="my-8">
               <AIInsightsPanel
-                title="Student AI Insights"
+                title="Personal AI Insights"
                 subtitle="Personalized suggestions based on your recent spending"
                 insights={aiInsights}
                 loading={insightsLoading}

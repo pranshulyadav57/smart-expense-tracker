@@ -166,45 +166,45 @@ body {
 }
 
 /* Theme variations */
-.home-page.theme-dark {
+html.dark .home-page {
   background: #0f172a;
   color: #e2e8f0;
 }
 
-.theme-dark .home-header {
+html.dark .home-header {
   background: linear-gradient(90deg, #1a2236, #172449);
   border-bottom-color: #334155;
 }
 
-.theme-dark .brand-name {
+html.dark .brand-name {
   color: #e2e8f0;
 }
 
-.theme-dark .nav-btn:hover {
+html.dark .nav-btn:hover {
   background: rgba(255, 255, 255, 0.1);
 }
 
-.theme-dark .nav-btn.outline {
+html.dark .nav-btn.outline {
   border-color: #334155;
 }
 
-.theme-dark .hero-title {
+html.dark .hero-title {
   color: #f1f5f9;
 }
 
-.theme-dark .hero-sub {
+html.dark .hero-sub {
   color: #cbd5e1;
 }
 
-.theme-dark .cta-secondary {
+html.dark .cta-secondary {
   border-color: #334155;
 }
 
-.theme-dark .cta-secondary:hover {
+html.dark .cta-secondary:hover {
   background: rgba(255, 255, 255, 0.05);
 }
 
-.theme-dark .home-footer {
+html.dark .home-footer {
   border-top-color: #334155;
   background: #0f172a;
   color: #94a3b8;

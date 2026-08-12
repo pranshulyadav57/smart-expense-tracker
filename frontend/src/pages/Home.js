@@ -35,7 +35,7 @@ export default function Home() {
             Manage Your Money Smartly
           </h1>
           <p className="hero-sub">
-            Track expenses, set budgets, and take control of your finances. Built for students and small businesses.
+            Track expenses, set budgets, and take control of your finances. Built for personal finance and small businesses.
           </p>
 
           <div className="hero-ctas">

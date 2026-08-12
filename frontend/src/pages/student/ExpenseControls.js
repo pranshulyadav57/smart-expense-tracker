@@ -11,7 +11,7 @@ export default function ExpenseControls({ filters = {}, onChange }) {
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow">
+    <div className="p-4 bg-white dark:bg-slate-800 rounded-lg shadow">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
         <input name="search" placeholder="Search notes or category" value={local.search || ''} onChange={(e) => setLocal({ ...local, search: e.target.value })} className="form-input" />
         <input name="category" placeholder="Category (optional)" value={local.category || ''} onChange={(e) => setLocal({ ...local, category: e.target.value })} className="form-input" />
@@ -33,11 +33,11 @@ export default function ExpenseControls({ filters = {}, onChange }) {
         </div>
 
         <div className="flex items-center gap-2">
-          <button className="px-3 py-1 bg-gray-100 rounded" onClick={() => { setLocal((s) => ({ ...s, page: Math.max(1, (Number(s.page || 1) - 1)) })); }}>
+          <button className="px-3 py-1 bg-gray-100 dark:bg-slate-700 dark:text-slate-100 rounded hover:bg-gray-200 dark:hover:bg-slate-600" onClick={() => { setLocal((s) => ({ ...s, page: Math.max(1, (Number(s.page || 1) - 1)) })); }}>
             Prev
           </button>
           <input type="number" min={1} value={local.page || 1} onChange={(e) => setLocal({ ...local, page: e.target.value })} className="w-20 form-input" />
-          <button className="px-3 py-1 bg-gray-100 rounded" onClick={() => { setLocal((s) => ({ ...s, page: (Number(s.page || 1) + 1) })); }}>
+          <button className="px-3 py-1 bg-gray-100 dark:bg-slate-700 dark:text-slate-100 rounded hover:bg-gray-200 dark:hover:bg-slate-600" onClick={() => { setLocal((s) => ({ ...s, page: (Number(s.page || 1) + 1) })); }}>
             Next
           </button>
         </div>

@@ -31,8 +31,8 @@ export default function AddExpenseForm({ onAdd, loading = false }) {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
-      <h3 className="text-xl font-semibold mb-4 text-slate-800">Add New Expense</h3>
+    <div className="p-6 bg-white dark:bg-slate-800 rounded-lg shadow-md">
+      <h3 className="text-xl font-semibold mb-4 text-slate-800 dark:text-slate-100">Add New Expense</h3>
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Category */}

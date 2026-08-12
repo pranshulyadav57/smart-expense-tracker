@@ -41,8 +41,8 @@ A powerful dual-mode financial management system for both students and businesse
 
 **HisabKitab** is a comprehensive financial management platform designed to serve two distinct user personas:
 
-### 🎓 **Student Mode**
-Personal expense tracking with budget management, spending analytics, and intelligent insights to help students manage their finances efficiently.
+### 🎓 **Personal Mode**
+Personal expense tracking with budget management, spending analytics, and intelligent insights to help users manage their finances efficiently.
 
 ### 💼 **Business Mode**
 A professional digital ledger system for small businesses and retailers to manage customer credit/debit transactions, generate reports, and maintain detailed transaction histories.
@@ -59,7 +59,7 @@ A professional digital ledger system for small businesses and retailers to manag
 
 ## ✨ Features
 
-### 🎓 Student Module
+### 🎓 Personal Module
 
 - ✅ **User Authentication**: Secure registration, login, and password recovery
 - ✅ **Expense Tracking**: Quick expense logging with categorization

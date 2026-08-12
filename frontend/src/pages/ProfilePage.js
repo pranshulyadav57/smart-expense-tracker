@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import { useTheme } from '../contexts/ThemeContext';
 import API from '../services/api';
 import { showError } from '../utils/Toast';
 import { useApi } from '../hooks/useApi';
@@ -8,7 +9,7 @@ import { LoadingSpinner } from '../components/StateComponents';
 import ErrorBoundary from '../components/ErrorBoundary';
 
 function ThemeToggle() {
-  const { theme, toggleTheme } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="theme-toggle-container" style={{ textAlign: 'right', marginBottom: '1rem' }}>

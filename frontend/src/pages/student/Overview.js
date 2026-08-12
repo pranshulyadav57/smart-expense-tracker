@@ -43,7 +43,7 @@ export default function StudentOverview() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-[var(--text-primary)]">Student Overview</h1>
+          <h1 className="text-2xl font-semibold text-[var(--text-primary)]">Personal Overview</h1>
           <p className="text-sm text-[var(--text-secondary)]">Snapshot of your spending and budgets</p>
         </div>
         <div className="flex items-center gap-3">

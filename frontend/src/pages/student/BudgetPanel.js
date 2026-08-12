@@ -39,8 +39,8 @@ export default function BudgetPanel({ summary, onBudgetUpdated }) {
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow mt-4">
-      <h3 className="font-semibold mb-2">Monthly Budget</h3>
+    <div className="p-4 bg-white dark:bg-slate-800 rounded-lg shadow mt-4">
+      <h3 className="font-semibold mb-2 text-slate-900 dark:text-slate-100">Monthly Budget</h3>
       {initialLoading ? (
         <div>
           <div className="mb-2"><SkeletonLoader className="h-10 w-48 rounded-md" /></div>
@@ -54,7 +54,7 @@ export default function BudgetPanel({ summary, onBudgetUpdated }) {
           </form>
           {error && <div className="text-sm text-red-600 mt-2">{error}</div>}
           {summary?.budget !== undefined && (
-            <div className="text-sm text-slate-500 mt-2">Current month spent ₹{summary.monthSpent?.toFixed(2)} of ₹{summary.budget?.toFixed(2)}</div>
+            <div className="text-sm text-slate-500 dark:text-slate-400 mt-2">Current month spent ₹{summary.monthSpent?.toFixed(2)} of ₹{summary.budget?.toFixed(2)}</div>
           )}
         </>
       )}
